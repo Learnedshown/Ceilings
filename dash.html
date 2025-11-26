@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BarangayKo Dashboard</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body {
+    background: #f5f7fb;
+    transition: all 0.3s ease;
+}
+
+/* Desktop Sidebar */
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: white;
+    border-right: 1px solid #e2e2e2;
+    position: fixed;
+    padding-top: 20px;
+    z-index: 100;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+    background: #0d6efd;
+    color: white;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+/* Mobile Sidebar Drawer */
+#mobileMenu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 240px;
+    height: 100%;
+    background: white;
+    border-right: 1px solid #e2e2e2;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    padding-top: 20px;
+    z-index: 5000;
+}
+
+#mobileMenu.show {
+    transform: translateX(0);
+}
+
+/* Backdrop */
+#backdrop {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    display: none;
+    z-index: 3000;
+}
+
+#backdrop.show {
+    display: block;
+}
+
+/* Mobile Header */
+.mobile-header {
+    display: none;
+}
+
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/*Small screen text adjustments*/
+@media (max-width: 576px) {
+    .card-box h5, .card-box h6 {
+        font-size: 1rem;
+    }
+    .card-box span.fs-2 {
+        font-size: 1.5rem;
+    }
+    .notif-box h6 {
+        font-size: 0.9rem;
+    }
+    .mobile-header h5 {
+        font-size: 1rem;
+    }
+}
+
+/* Card Boxes */
+.card-box {
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.notif-box {
+    border-radius: 12px;
+    background: white;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        margin-left: 0;
+        padding-top: 80px;
+    }
+
+    .mobile-header {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background: #0d6efd;
+        color: white;
+        align-items: center;
+        padding: 0 15px;
+        z-index: 9999;
+    }
+
+    .mobile-header button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        position: relative;
+        z-index: 99999;
+    }
+
+    #mobileMenu a {
+        padding: 15px;
+        display: block;
+        font-size: 17px;
+    }
+}
+
+
+</style>
+
+<script>
+
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('backdrop');
+
+    menu.classList.toggle("show");
+    backdrop.classList.toggle("show");
+}
+
+// Reset mobile menu on desktop resize
+window.addEventListener("resize", () => {
+    const mobileMenu = document.getElementById("mobileMenu");
+    const backdrop = document.getElementById("backdrop");
+
+    if (window.innerWidth >= 992) {
+        mobileMenu.classList.remove("show");
+        if (backdrop) backdrop.classList.remove("show");
+    }
+});
+
+
+</script>
+
+</head>
+<body>
+
+<!-- Mobile Header -->
+<div class="mobile-header">
+    <button onclick="toggleMenu()">☰</button>
+    <h5 class="ms-3 mt-1">BarangayKo</h5>
+</div>
+
+<!-- Mobile Sidebar -->
+<div id="mobileMenu">
+    <h4 class="text-center fw-bold mb-4">BarangayKo</h4>
+    <a class="active" href="#">Dashboard</a>
+    <a href="#">Request Certificate</a>
+    <a href="#">My Requests</a>
+    <a href="#">Notifications</a>
+    <a href="#">My Profile</a>
+    <a href="#">Help / FAQ</a>
+    <a href="#" class="text-danger mt-3">Logout</a>
+</div>
+
+<!-- Backdrop -->
+<div id="backdrop" onclick="toggleMenu()"></div>
+
+<!-- Desktop Sidebar -->
+<div class="sidebar">
+    <h4 class="text-center fw-bold mb-4">BarangayKo</h4>
+    <a class="active" href="#">Dashboard</a>
+    <a href="#">Request Certificate</a>
+    <a href="#">My Requests</a>
+    <a href="#">Notifications</a>
+    <a href="#">My Profile</a>
+    <a href="#">Help / FAQ</a>
+    <p class="text-center text-muted mt-4">&copy; BarangayKo System</p>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <div class="d-flex justify-content-between mb-3 flex-wrap">
+        <h2 class="fw-bold">Dashboard</h2>
+        <div class="mt-2">
+            <span class="me-3">👤 Resident</span>
+            <a href="#" class="btn btn-sm btn-outline-danger">Logout</a>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-4 col-12">
+            <div class="card-box text-center bg-primary text-white">
+                <h5>Request Certificate</h5>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-6">
+            <div class="card-box">
+                <h6>Approved & Ready to Claim</h6>
+                <span class="fs-2 fw-bold">1</span>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-6">
+            <div class="card-box">
+                <h6>Pending Requests</h6>
+                <span class="fs-2 fw-bold">2</span>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-6">
+            <div class="card-box">
+                <h6>Rejected Requests</h6>
+                <span class="fs-2 fw-bold">0</span>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+            <div class="notif-box">
+                <h6 class="fw-bold">Notifications</h6>
+                <div class="alert alert-light border mt-2">
+                    ✔ Your certificate request has been approved and is ready for claiming
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+            <div class="notif-box">
+                <h6 class="fw-bold">Recent Updates</h6>
+                • 3 New Residents Added <br>
+                • 2 Pending Certificate Requests <br>
+                • 1 Blotter Filed
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FLASK STATIC JS -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+
+
+</html>
