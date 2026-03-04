@@ -1,0 +1,102 @@
+ body {
+      overflow-x: hidden;
+    }
+
+    #sidebar {
+      width: 280px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1rem;
+      background-color: var(--bs-body-bg);
+      border-right: 1px solid var(--bs-border-color);
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+      z-index: 1040;
+    }
+
+    #sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    main {
+      margin-left: 280px;
+      padding: 1.5rem;
+      transition: margin-left 0.3s ease;
+      min-height: 100vh;
+      background-color: var(--bs-body-bg);
+      color: var(--bs-body-color);
+    }
+
+    main.expanded {
+      margin-left: 0;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      #sidebar {
+        transform: translateX(-100%);
+      }
+      #sidebar.show {
+        transform: translateX(0);
+      }
+      main {
+        margin-left: 0;
+      }
+    }
+
+    .btn-toggle {
+      width: 100%;
+      text-align: left;
+      font-weight: 600;
+      color: var(--bs-body-color);
+    }
+
+    .btn-toggle:hover {
+      background-color: var(--bs-secondary-bg);
+      color: var(--bs-primary);
+    }
+
+    .btn-toggle[aria-expanded="true"] {
+      color: var(--bs-primary);
+    }
+
+    .btn-toggle-nav a {
+      padding-left: 1.5rem;
+      color: var(--bs-body-color);
+    }
+
+    .btn-toggle-nav a.active-link {
+      font-weight: 700;
+      color: var(--bs-primary) !important;
+    }
+
+    /* Overlay for mobile */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      z-index: 1030;
+    }
+
+    #overlay.show {
+      display: block;
+    }
+
+    /* Theme button styling */
+    .btn-bd-primary {
+      --bs-btn-bg: #712cf9;
+      --bs-btn-border-color: #712cf9;
+      --bs-btn-hover-bg: #6528e0;
+      --bs-btn-hover-border-color: #6528e0;
+      --bs-btn-active-bg: #5a23c8;
+      --bs-btn-active-border-color: #5a23c8;
+      --bs-btn-color: #fff;
+      font-weight: 600;
+    }
+
+    .bd-mode-toggle {
+      z-index: 1500;
+    }
